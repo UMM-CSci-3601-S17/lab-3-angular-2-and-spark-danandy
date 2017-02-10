@@ -13,3 +13,13 @@ Yarn runs on the client. Responsible for efficient dependency management. Caches
 
 4. How does the navbar work in this project? Is our SparkJava server the only thing doing routing?
 
+Each AppComponent has a <navbar-component> component. <navbar-component> is a custom component created
+using typescript. The component is declared in angular within the AppModule class which gets Navbar from './app/navbar/navbar.component'.
+When the component is included, if it has a "selector" within @Component, it will tie that component to "selector" as the HTML tag.
+
+The client is routing as well as the server. Since Angular 2 apps have only one page, when
+you go to a different pge within the browser the client needs to route you to the appropriate
+part of the app.
+
+
+
