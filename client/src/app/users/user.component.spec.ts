@@ -44,6 +44,7 @@ describe("User component", () => {
 
         TestBed.configureTestingModule({
             imports: [PipeModule],
+            
             declarations: [ UserComponent ],
             providers:    [ { provide: UserListService, useValue: userListServiceStub } ]
         })

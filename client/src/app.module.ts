@@ -6,11 +6,12 @@ import { AppComponent }         from './app/app.component';
 import { NavbarComponent } from './app/navbar/navbar.component';
 import { HomeComponent} from './app/home/home.component';
 import { KittensComponent }   from './app/kittens/kittens.component';
+import { routing } from './app/app.routes';
+import { FormsModule } from '@angular/forms';
 import { UserListComponent } from './app/users/user-list.component';
 import { UserListService } from './app/users/user-list.service';
 import { TodoListComponent } from "./app/todos/todo-list.component";
-import { routing } from './app/app.routes';
-import { FormsModule } from '@angular/forms';
+import {TodoListService} from "./app/todos/todo-list.service";
 
 import { PipeModule } from './pipe.module';
 
@@ -31,7 +32,7 @@ import { PipeModule } from './pipe.module';
         UserListComponent,
         TodoListComponent,
     ],
-    providers: [ UserListService ],
+    providers: [ UserListService, TodoListService ],
     bootstrap: [ AppComponent ]
 })
 

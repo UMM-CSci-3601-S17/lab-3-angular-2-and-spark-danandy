@@ -3,7 +3,8 @@
         <input #input type="text" placeholder="Owner" [(ngModel)]="ownerSearch">
         <input #input type="text" placeholder="Category" [(ngModel)]="categorySearch">
         <input #input type="text" placeholder="Body Text" [(ngModel)]="bodySearch">
-        <select [(ngModel)]="statusSearch">
+        <!--<input #input type="number" placeholder="Limit" [(ngModel)]="limitNumber">-->
+        <select [(ngModel)]="statusFilter">
 
             <option value = "" >All Status </option>
             <option value = "1">Complete</option>
@@ -11,10 +12,10 @@
         </select>
     </li>
     <li class="list-group-item list-group-item-info">Todo List</li>
-    <li *ngFor="let todo of todos | async | filterBy: {owner: ownerSearch} | filterBy: {category: categorySearch}
+    <li *ngFor="let todo of todos | filterBy: {owner: ownerSearch} | filterBy: {category: categorySearch}
                             | filterBy: {body: bodySearch}
-                            | filterBy: {status: statusSearch}" class="list-group-item">
-        {{"Status: [" + (todo.status?"Complete":"Unfinished") + "] " + "Owner Name: " + todo.owner + " Category: " + todo.category}}
+                            | filterBy: {status: statusFilter}" class="list-group-item">
+        {{"Status: [" + (todo.status?"Complete":"Incomplete") + "] " + "Owner Name: " + todo.owner + " Category: " + todo.category}}
         <br>
         <p>
             {{"Body: " + todo.body}}
