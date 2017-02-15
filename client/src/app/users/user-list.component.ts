@@ -6,7 +6,7 @@ import { FilterBy } from "./filter.pipe";
 @Component({
     selector: 'user-list-component',
     templateUrl: 'user-list.component.html',
-    providers: [ FilterBy ]
+    providers: [FilterBy]
 })
 
 export class UserListComponent implements OnInit {
