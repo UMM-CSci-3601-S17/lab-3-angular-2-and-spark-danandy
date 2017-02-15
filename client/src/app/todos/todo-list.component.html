@@ -5,8 +5,7 @@
         <input #input type="text" placeholder="Body Text" [(ngModel)]="bodySearch">
         <!--<input #input type="number" placeholder="Limit" [(ngModel)]="limitNumber">-->
         <select [(ngModel)]="statusFilter">
-
-            <option value = "" >All Status </option>
+            <option value = "" >Complete/Incomplete</option>
             <option value = "1">Complete</option>
             <option value = "0">Incomplete</option>
         </select>
@@ -14,7 +13,7 @@
     <li class="list-group-item list-group-item-info">Todo List</li>
     <li *ngFor="let todo of todos | filterBy: {owner: ownerSearch} | filterBy: {category: categorySearch}
                             | filterBy: {body: bodySearch}
-                            | filterBy: {status: statusFilter}" class="list-group-item">
+                            | filterBy: {status: statusFilter}" class="list-group-item" [ngStyle]="{'background-color': getColor(todo.category)}">
         {{"Status: [" + (todo.status?"Complete":"Incomplete") + "] " + "Owner Name: " + todo.owner + " Category: " + todo.category}}
         <br>
         <p>
