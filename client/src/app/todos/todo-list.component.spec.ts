@@ -4,6 +4,7 @@ import { TodoListComponent } from "./todo-list.component";
 import { TodoListService } from "./todo-list.service";
 import { Observable } from "rxjs";
 import { PipeModule } from "../../pipe.module";
+import { FilterBy } from "./filter.pipe";
 
 describe("Todo list", () => {
 
@@ -47,7 +48,7 @@ describe("Todo list", () => {
             declarations: [ TodoListComponent ],
             // providers:    [ TodoListService ]  // NO! Don't provide the real service!
             // Provide a test-double instead
-            providers:    [ { provide: TodoListService, useValue: todoListServiceStub } ]
+            providers:    [ { provide: TodoListService, useValue: todoListServiceStub }, [FilterBy] ]
         })
     });
 
@@ -71,6 +72,16 @@ describe("Todo list", () => {
     it("contain a user named 'Blanche'", () => {
         expect(todoList.todos.some((todo: Todo) => todo.owner === "Blanche" )).toBe(true);
     });
+
+
+    //Tried, outputs 'IMA STRING! WUTTTTT!'
+    //and TypeError: undefined is not a function (evaluating 'value.toLowerCase()')
+    //'value' is undefined in the filterByString function, and toLowerCase is called on it
+    
+    /*it("contains two todos with user 'Blanche' (filter with pipe)", () => {
+        let filterBy : FilterBy = new FilterBy();
+        expect(filterBy.transform(todoList.todos, "{owner: Blanche}").length).toBe(2);
+    });*/
 
     it("doesn't contain a user named 'Santa'", () => {
         expect(todoList.todos.some((todo: Todo) => todo.owner === "Santa" )).toBe(false);
@@ -102,5 +113,9 @@ describe("Todo list", () => {
     it("doesn't have any users with category astronomy", () => {
         expect(todoList.todos.filter((todo: Todo) => todo.category === "astronomy").length).toBe(0);
     });
+
+
+
+
 
 });
