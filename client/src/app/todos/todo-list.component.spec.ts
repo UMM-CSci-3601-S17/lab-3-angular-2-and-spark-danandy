@@ -63,6 +63,7 @@ describe("Todo list", () => {
         expect(todoList.todos.length).toBe(3);
     });
 
+    //Owner tests
     it("contains a user named 'Barry'", () => {
         expect(todoList.todos.some((todo: Todo) => todo.owner === "Barry" )).toBe(true);
     });
@@ -75,8 +76,31 @@ describe("Todo list", () => {
         expect(todoList.todos.some((todo: Todo) => todo.owner === "Santa" )).toBe(false);
     });
 
+
+    //body tests
+
+    it("contains a todo whose body text contains 'occaecat'", () => {
+        expect(todoList.todos.some((todo: Todo) => todo.body.indexOf("occaecat", 0) > 0)).toBe(true);
+    });
+
+    it("contains a todo whose body text doesn't contain 'occaekitten'", () => {
+        expect(todoList.todos.some((todo: Todo) => todo.body.indexOf("occaekitten", 0) > 0)).toBe(false);
+    });
+
+    //status
+
+    it("contains two statuses that are true", () => {
+        expect(todoList.todos.filter((todo: Todo) => todo.status === true).length).toBe(2);
+    });
+
+    //category
+
     it("has two users with category homework", () => {
         expect(todoList.todos.filter((todo: Todo) => todo.category === "homework").length).toBe(2);
+    });
+
+    it("doesn't have any users with category astronomy", () => {
+        expect(todoList.todos.filter((todo: Todo) => todo.category === "astronomy").length).toBe(0);
     });
 
 });
