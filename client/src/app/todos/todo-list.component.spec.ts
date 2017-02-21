@@ -30,7 +30,7 @@ describe("Todo list", () => {
                     id: "5889598585bda42fb8388ba1",
                     owner: "Blanche",
                     status: false,
-                    body: "Laborum banana banana incididunt nisi eiusmod aliqua velit quis occaecat excepteur ut in ad. Commodo adipisicing sint ipsum irure amet exercitation voluptate mollit.",
+                    body: "Laborum banana incididunt nisi eiusmod aliqua velit quis occaecat excepteur ut in ad. Commodo adipisicing sint ipsum irure amet exercitation voluptate mollit.",
                     category: "homework"
                 },
                 {
@@ -110,7 +110,7 @@ describe("Todo list", () => {
         let filterBy : FilterBy = new FilterBy();
         let filterTerms : Object = new Object();
         filterTerms["body"] = "banana";
-        expect(filterBy.transform(todoList.todos, filterTerms).length).toBe(3);
+        expect(filterBy.transform(todoList.todos, filterTerms).length).toBe(2);
     });
 
     it("doesn't contain a user named 'Santa'", () => {
