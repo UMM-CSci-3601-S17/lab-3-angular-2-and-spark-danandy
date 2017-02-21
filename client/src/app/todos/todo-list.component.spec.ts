@@ -4,6 +4,7 @@ import { TodoListComponent } from "./todo-list.component";
 import { TodoListService } from "./todo-list.service";
 import { Observable } from "rxjs";
 import { PipeModule } from "../../pipe.module";
+import { FilterBy } from "./filter.pipe";
 
 describe("Todo list", () => {
 
@@ -47,7 +48,7 @@ describe("Todo list", () => {
             declarations: [ TodoListComponent ],
             // providers:    [ TodoListService ]  // NO! Don't provide the real service!
             // Provide a test-double instead
-            providers:    [ { provide: TodoListService, useValue: todoListServiceStub } ]
+            providers:    [ { provide: TodoListService, useValue: todoListServiceStub }, [FilterBy] ]
         })
     });
 
@@ -63,6 +64,7 @@ describe("Todo list", () => {
         expect(todoList.todos.length).toBe(3);
     });
 
+    //Owner tests
     it("contains a user named 'Barry'", () => {
         expect(todoList.todos.some((todo: Todo) => todo.owner === "Barry" )).toBe(true);
     });
@@ -71,13 +73,48 @@ describe("Todo list", () => {
         expect(todoList.todos.some((todo: Todo) => todo.owner === "Blanche" )).toBe(true);
     });
 
+
+    //Tried, outputs 'IMA STRING! WUTTTTT!'
+    //and TypeError: undefined is not a function (evaluating 'value.toLowerCase()')
+    //'value' is undefined in the filterByString function, and toLowerCase is called on it
+    
+    /*it("contains two todos with user 'Blanche' (filter with pipe)", () => {
+        let filterBy : FilterBy = new FilterBy();
+        expect(filterBy.transform(todoList.todos, "{owner: Blanche}").length).toBe(2);
+    });*/
+
     it("doesn't contain a user named 'Santa'", () => {
         expect(todoList.todos.some((todo: Todo) => todo.owner === "Santa" )).toBe(false);
     });
 
+
+    //body tests
+
+    it("contains a todo whose body text contains 'occaecat'", () => {
+        expect(todoList.todos.some((todo: Todo) => todo.body.indexOf("occaecat", 0) > 0)).toBe(true);
+    });
+
+    it("contains a todo whose body text doesn't contain 'occaekitten'", () => {
+        expect(todoList.todos.some((todo: Todo) => todo.body.indexOf("occaekitten", 0) > 0)).toBe(false);
+    });
+
+    //status
+
+    it("contains two statuses that are true", () => {
+        expect(todoList.todos.filter((todo: Todo) => todo.status === true).length).toBe(2);
+    });
+
+    //category
+
     it("has two users with category homework", () => {
         expect(todoList.todos.filter((todo: Todo) => todo.category === "homework").length).toBe(2);
     });
+
+    it("doesn't have any users with category astronomy", () => {
+        expect(todoList.todos.filter((todo: Todo) => todo.category === "astronomy").length).toBe(0);
+    });
+
+
 
 
 
