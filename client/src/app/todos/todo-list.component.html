@@ -1,10 +1,10 @@
 <ul class="list-group">
     <li class="list-group-item list-group-item-info">
-        <input #input type="text" placeholder="Owner" (input)="ownerSearch">
-        <input #input type="text" placeholder="Category" (input)="categorySearch">
-        <input #input type="text" placeholder="Body Text" (input)="bodySearch">
+        <input #input type="text" placeholder="Owner" (input)="ownerSearch = $event.target.value">
+        <input #input type="text" placeholder="Category" (input)="categorySearch = $event.target.value">
+        <input #input type="text" placeholder="Body Text" (input)="bodySearch= $event.target.value">
         <!--<input #input type="number" placeholder="Limit" [(ngModel)]="limitNumber">-->
-        <select (input)="statusFilter">
+        <select (input)="statusFilter = $event.target.value">
             <option value = "" >Complete/Incomplete</option>
             <option value = "1">Complete</option>
             <option value = "0">Incomplete</option>
